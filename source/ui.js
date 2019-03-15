@@ -51,7 +51,7 @@ const printCommitLog = async repoUrl => {
 
 module.exports = async (options, pkg) => {
 	const oldVersion = pkg.version;
-	const extraBaseUrls = ['gitlab.com'];
+	const extraBaseUrls = ['gitlab.com', 'github.intern.weebly.net'];
 	const repoUrl = pkg.repository && githubUrlFromGit(pkg.repository.url, {extraBaseUrls});
 
 	console.log(`\nPublish a new version of ${chalk.bold.magenta(pkg.name)} ${chalk.dim(`(current: ${oldVersion})`)}\n`);
