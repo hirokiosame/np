@@ -32,11 +32,17 @@ exports.username = async ({externalRegistry}) => {
 	}
 };
 
-exports.collaborators = async packageName => {
+exports.collaborators = async ({packageName, externalRegistry}) => {
 	ow(packageName, ow.string);
 
+	const args = ['access', 'ls-collaborators', packageName];
+
+	if (externalRegistry) {
+		args.push(`--registry=${externalRegistry}`);
+	}
+
 	try {
-		return await execa.stdout('npm', ['access', 'ls-collaborators', packageName]);
+		return await execa.stdout('npm', args);
 	} catch (error) {
 		// Ignore non-existing package error
 		if (error.stderr.includes('code E404')) {
